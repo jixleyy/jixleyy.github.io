@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinguaLearn - Master French & Japanese</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-language me-2"></i>LinguaLearn
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-home me-1"></i> Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-globe me-1"></i> Languages
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="#" data-language="french"><i class="fas fa-flag-us me-2"></i> French</a></li>
+                            <li><a class="dropdown-item" href="#" data-language="japanese"><i class="fas fa-flag-jp me-2"></i> Japanese</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-book me-1"></i> Lessons</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-trophy me-1"></i> Achievements</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-outline-light btn-sm me-3">Sign In</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mt-4">
+        <!-- Dashboard Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="h2">Welcome back, Learner!</h1>
+                <p class="text-light">Continue your journey to mastering French and Japanese</p>
+            </div>
+        </div>
+
+        <!-- Language Selection Cards -->
+        <div class="row mb-5">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 language-card" data-language="french">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="language-icon bg-primary text-white rounded-circle p-3 me-3">
+                                <i class="fas fa-flag-us fa-2x"></i>
+                            </div>
+                            <div>
+                                <h3 class="card-title h5 text-light">French</h3>
+                                <p class="card-text text-light">Niveau: Intermediate</p>
+                            </div>
+                        </div>
+                        <div class="progress mb-3" style="height: 8px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 65%"></div>
+                        </div>
+                        <p class="text-light small">65% complete • 120 of 185 vocabulary items learned</p>
+                        <a href="#" class="btn btn-primary btn-sm mt-2">Continue Learning</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 language-card" data-language="japanese">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="language-icon bg-danger text-white rounded-circle p-3 me-3">
+                                <i class="fas fa-flag-jp fa-2x"></i>
+                            </div>
+                            <div>
+                                <h3 class="card-title h5 text-light">Japanese</h3>
+                                <p class="card-text text-light">Level: Beginner</p>
+                            </div>
+                        </div>
+                        <div class="progress mb-3" style="height: 8px;">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 30%"></div>
+                        </div>
+                        <p class="text-light small">30% complete • 45 of 150 vocabulary items learned</p>
+                        <a href="#" class="btn btn-danger btn-sm mt-2">Continue Learning</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Today's Activities -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="h4 mb-4 text-light">Today's Activities</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="card activity-card">
+                            <div class="card-body text-center">
+                                <div class="activity-icon bg-warning text-white rounded-circle mx-auto mb-3">
+                                    <i class="fas fa-brain fa-2x"></i>
+                                </div>
+                                <h5 class="h6 text-light">Review</h5>
+                                <p class="text-light small">French vocabulary</p>
+                                <p class="text-success small"><strong>12 items</strong></p>
+                                <button class="btn btn-warning btn-sm">Start Review</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card activity-card">
+                            <div class="card-body text-center">
+                                <div class="activity-icon bg-primary text-white rounded-circle mx-auto mb-3">
+                                    <i class="fas fa-graduation-cap fa-2x"></i>
+                                </div>
+                                <h5 class="h6 text-light">New Lesson</h5>
+                                <p class="text-light small">Japanese Hiragana</p>
+                                <p class="text-success small"><strong>5 new characters</strong></p>
+                                <button class="btn btn-primary btn-sm">Start Lesson</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card activity-card">
+                            <div class="card-body text-center">
+                                <div class="activity-icon bg-success text-white rounded-circle mx-auto mb-3">
+                                    <i class="fas fa-headphones fa-2x"></i>
+                                </div>
+                                <h5 class="h6 text-light">Pronunciation</h5>
+                                <p class="text-light small">French Phonetics</p>
+                                <p class="text-success small"><strong>15 minutes</strong></p>
+                                <button class="btn btn-success btn-sm">Practice Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lesson Preview Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="h4 mb-4 text-light">Today's Lessons</h2>
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card lesson-card french-content">
+                            <div class="card-body">
+                                <h4 class="card-title h5 text-light"><i class="fas fa-star text-warning me-2"></i> French: Daily Greetings</h4>
+                                <p class="card-text small text-light">Learn essential greetings for different times of day and contexts</p>
+                                
+                                <div class="vocab-section mt-3">
+                                    <h5 class="h6 text-light">Key Vocabulary:</h5>
+                                    
+                                    <div class="vocab-item">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <div class="lang-french h6 mb-0 text-light">Bonjour</div>
+                                                <div class="text-light small">Hello (formal)</div>
+                                            </div>
+                                            <button class="btn btn-sm btn-outline-primary play-audio" data-audio="bonjour">
+                                                <i class="fas fa-volume-up"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="vocab-item">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <div class="lang-french h6 mb-0 text-light">Bonsoir</div>
+                                                <div class="text-light small">Good evening</div>
+                                            </div>
+                                            <button class="btn btn-sm btn-outline-primary play-audio" data-audio="bonsoir">
+                                                <i class="fas fa-volume-up"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="vocab-item">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <div class="lang-french h6 mb-0 text-light">Au revoir</div>
+                                                <div class="text-light small">Goodbye</div>
+                                            </div>
+                                            <button class="btn btn-sm btn-outline-primary play-audio" data-audio="au-revoir">
+                                                <i class="fas fa-volume-up"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-3">
+                                    <button class="btn btn-primary btn-sm me-2">Practice</button>
+                                    <button class="btn btn-outline-secondary btn-sm">Review</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <div class="card lesson-card japanese-content">
+                            <div class="card-body">
+                                <h4 class="card-title h5 text-light"><i class="fas fa-star text-warning me-2"></i> Japanese: Basic Hiragana</h4>
+                                <p class="card-text small text-light">Master the first 10 hiragana characters with stroke order and pronunciation</p>
+                                
+                                <div class="vocab-section mt-3">
+                                    <h5 class="h6 text-light">Hiragana Characters:</h5>
+                                    
+                                    <div class="vocab-item">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <div class="lang-japanese h4 mb-0 text-light">あ</div>
+                                                <div class="text-light small">A</div>
+                                            </div>
+                                            <button class="btn btn-sm btn-outline-primary play-audio" data-audio="a-hiragana">
+                                                <i class="fas fa-volume-up"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="vocab-item">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <div class="lang-japanese h4 mb-0 text-light">い</div>
+                                                <div class="text-light small">I</div>
+                                            </div>
+                                            <button class="btn btn-sm btn-outline-primary play-audio" data-audio="i-hiragana">
+                                                <i class="fas fa-volume-up"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="vocab-item">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <div class="lang-japanese h4 mb-0 text-light">う</div>
+                                                <div class="text-light small">U</div>
+                                            </div>
+                                            <button class="btn btn-sm btn-outline-primary play-audio" data-audio="u-hiragana">
+                                                <i class="fas fa-volume-up"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-3">
+                                    <button class="btn btn-danger btn-sm me-2">Practice Writing</button>
+                                    <button class="btn btn-outline-secondary btn-sm">Take Quiz</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Grammar Section -->
+                <div class="card lesson-content mt-4">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="h6 mb-0"><i class="fas fa-book me-2"></i> French Grammar Focus: Present Tense</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="h6 text-light">Regular -ER Verbs Conjugation</h5>
+                        <p class="text-light small">In French, regular -ER verbs follow a predictable pattern in the present tense:</p>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="h6 text-light">Parler (to speak):</h6>
+                                <ul class="list-group list-group-flush small">
+                                    <li class="list-group-item p-2 text-light">Je parle (I speak)</li>
+                                    <li class="list-group-item p-2 text-light">Tu parles (You speak - informal)</li>
+                                    <li class="list-group-item p-2 text-light">Il/Elle parle (He/She speaks)</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="h6 text-light">Examples in Sentences:</h6>
+                                <p class="text-light small"><strong>Je parle français.</strong> - I speak French.</p>
+                                <p class="text-light small"><strong>Tu parles anglais?</strong> - Do you speak English?</p>
+                                <p class="text-light small"><strong>Elle parle espagnol.</strong> - She speaks Spanish.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <h6 class="h6 text-light">Try it yourself:</h6>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="input-group input-group-sm mb-3">
+                                        <span class="input-group-text">Je</span>
+                                        <input type="text" class="form-control" placeholder="Example: 'aime' for 'aimer' (to love)">
+                                        <button class="btn btn-outline-success">Check</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kanji and Advanced Content Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="h4 mb-4 text-light">Advanced Learning</h2>
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="h5 card-title text-light">Kanji of the Day: 学 (Manabu - Study)</h4>
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 text-center">
+                                        <div class="kanji-character mb-3">学</div>
+                                        <p class="lead text-light">Manabu</p>
+                                        <p class="text-light small">To study, to learn</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h5 class="h6 text-light">Strokes: 8</h5>
+                                        <div class="mb-3">
+                                            <p class="text-light small"><strong>On Yomi:</strong> ガク (gaku)</p>
+                                            <p class="text-light small"><strong>Kun Yomi:</strong> まな-ぶ (manabu)</p>
+                                        </div>
+                                        <div class="examples mb-3">
+                                            <p class="text-light small"><strong>Examples:</strong></p>
+                                            <ul class="list-unstyled small">
+                                                <li class="mb-2 text-light">
+                                                    <span class="fw-bold">学校 (gakkou)</span> - school
+                                                    <button class="btn btn-sm btn-outline-primary play-audio ms-2" data-audio="gakkou">
+                                                        <i class="fas fa-volume-up"></i>
+                                                    </button>
+                                                </li>
+                                                <li class="mb-2 text-light">
+                                                    <span class="fw-bold">学生 (gakusei)</span> - student
+                                                    <button class="btn btn-sm btn-outline-primary play-audio ms-2" data-audio="gakusei">
+                                                        <i class="fas fa-volume-up"></i>
+                                                    </button>
+                                                </li>
+                                                <li class="mb-2 text-light">
+                                                    <span class="fw-bold">勉強 (benkyou)</span> - study
+                                                    <button class="btn btn-sm btn-outline-primary play-audio ms-2" data-audio="benkyou">
+                                                        <i class="fas fa-volume-up"></i>
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <button class="btn btn-danger btn-sm">Practice Writing</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="h5 card-title text-light">French Verb Conjugation: Être (To Be)</h4>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-sm table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-light">Subject</th>
+                                                        <th class="text-light">French</th>
+                                                        <th class="text-light">English</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-light">Je</td>
+                                                        <td class="text-light">suis</td>
+                                                        <td class="text-light">I am</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-light">Tu</td>
+                                                        <td class="text-light">es</td>
+                                                        <td class="text-light">You are (informal)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-light">Il/Elle/On</td>
+                                                        <td class="text-light">est</td>
+                                                        <td class="text-light">He/She/One is</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-light">Nous</td>
+                                                        <td class="text-light">sommes</td>
+                                                        <td class="text-light">We are</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-light">Vous</td>
+                                                        <td class="text-light">êtes</td>
+                                                        <td class="text-light">You are (formal/plural)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-light">Ils/Elles</td>
+                                                        <td class="text-light">sont</td>
+                                                        <td class="text-light">They are</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-3">
+                                    <h6 class="h6 text-light">Example Sentences:</h6>
+                                    <p class="text-light small"><strong>Je suis étudiant.</strong> - I am a student.</p>
+                                    <p class="text-light small"><strong>Elle est professeur.</strong> - She is a teacher.</p>
+                                    <p class="text-light small"><strong>Nous sommes contents.</strong> - We are happy.</p>
+                                </div>
+                                
+                                <button class="btn btn-primary btn-sm mt-2">Practice Conjugation</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review and Practice Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="h4 mb-4 text-light">Review & Practice</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <div class="display-6 text-primary mb-1">12</div>
+                                <p class="card-text text-light small">French words to review</p>
+                                <button class="btn btn-outline-primary btn-sm">Review Now</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <div class="display-6 text-danger mb-1">8</div>
+                                <p class="card-text text-light small">Japanese characters to review</p>
+                                <button class="btn btn-outline-danger btn-sm">Review Now</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <div class="display-6 text-success mb-1">5</div>
+                                <p class="card-text text-light small">Grammar points to practice</p>
+                                <button class="btn btn-outline-success btn-sm">Practice Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5 class="h6 text-light">LinguaLearn</h5>
+                    <p class="text-light small">Master French and Japanese with our innovative learning platform.</p>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <h6 class="h6 text-light">Learn</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="#" class="text-light">French</a></li>
+                        <li><a href="#" class="text-light">Japanese</a></li>
+                        <li><a href="#" class="text-light">Grammar</a></li>
+                        <li><a href="#" class="text-light">Vocabulary</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <h6 class="h6 text-light">Community</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="#" class="text-light">Forums</a></li>
+                        <li><a href="#" class="text-light">Events</a></li>
+                        <li><a href="#" class="text-light">Challenges</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h6 class="h6 text-light">Subscribe</h6>
+                    <div class="input-group input-group-sm">
+                        <input type="email" class="form-control" placeholder="Your email">
+                        <button class="btn btn-primary">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-3">
+            <div class="text-center">
+                <p class="text-light mb-0 small">&copy; 2023 LinguaLearn. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
