@@ -1,59 +1,65 @@
-/* General Reset */
+/* Nautical Portfolio Enhanced CSS */
+
+/* Reset and Typography */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Roboto Slab', serif;
 }
-
-body[data-theme='dark'] {
+body {
   background-color: #0b1e2d;
   color: #e0f7fa;
+  overflow-x: hidden;
+  perspective: 1000px;
 }
 
+/* Container */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem 2rem;
 }
 
+/* Header */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0;
-  background: rgba(11, 30, 45, 0.8);
+  background: rgba(11,30,45,0.85);
   position: sticky;
   top: 0;
   z-index: 100;
   backdrop-filter: blur(10px);
+  box-shadow: 0 2px 15px rgba(0,0,0,0.2);
 }
-
 .logo {
-  font-weight: bold;
-  font-size: 1.5rem;
+  font-family: 'Pacifico', cursive;
+  font-size: 2.5rem;
   color: #00bcd4;
+  text-shadow: 0 0 10px rgba(0,188,212,0.6);
 }
-
 .nav-list {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
   list-style: none;
 }
-
 .nav-list a {
   color: #e0f7fa;
   text-decoration: none;
-  transition: color 0.3s;
+  font-weight: 700;
+  transition: color 0.3s, text-shadow 0.3s;
 }
-
 .nav-list a:hover {
   color: #00bcd4;
+  text-shadow: 0 0 8px rgba(0,188,212,0.7);
 }
 
+/* Hero Section */
 .hero {
   position: relative;
-  min-height: 90vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,7 +67,6 @@ body[data-theme='dark'] {
   text-align: center;
   overflow: hidden;
 }
-
 .hero-bg.nautical-gradient {
   position: absolute;
   top: 0;
@@ -69,82 +74,106 @@ body[data-theme='dark'] {
   width: 100%;
   height: 100%;
   background: linear-gradient(160deg, #003b5c, #007ea7, #00bcd4);
-  z-index: -2;
+  z-index: -3;
+  animation: subtleGradient 30s ease-in-out infinite alternate;
+}
+@keyframes subtleGradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
-.wave-animation {
+/* Waves */
+.wave-layer {
   position: absolute;
   bottom: 0;
   width: 200%;
   height: 20%;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255,255,255,0.05);
   border-radius: 43%;
-  animation: wave 8s infinite linear;
-  z-index: -1;
+  animation: wave-move 12s linear infinite;
+  z-index: -2;
+  filter: blur(2px);
 }
-
-@keyframes wave {
+.wave-layer.wave2 { animation-duration: 10s; opacity: 0.03; }
+.wave-layer.wave3 { animation-duration: 14s; opacity: 0.02; }
+@keyframes wave-move {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
+/* Hero Content */
 .hero-content .eyebrow {
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.25em;
   margin-bottom: 1rem;
   color: #b2ebf2;
+  text-shadow: 0 0 6px rgba(0,188,212,0.5);
 }
-
 .hero-content h1 {
-  font-size: 3rem;
+  font-weight: 700;
+  font-size: 4rem;
+  line-height: 1.2;
+  background: linear-gradient(90deg, #00bcd4, #007ea7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 1rem;
-  color: #e0f7fa;
+  animation: heroGlow 3s infinite alternate;
 }
-
+@keyframes heroGlow {
+  0% { text-shadow: 0 0 10px rgba(0,188,212,0.5); }
+  100% { text-shadow: 0 0 25px rgba(0,188,212,0.9); }
+}
 .hero-content h1 span {
-  font-size: 1.5rem;
-  color: #b2ebf2;
   display: block;
+  font-size: 1.8rem;
+  color: #b2ebf2;
   margin-top: 0.5rem;
+  text-shadow: 0 0 6px rgba(0,188,212,0.5);
 }
-
 .hero-content .lead {
-  max-width: 600px;
+  max-width: 650px;
   margin: 1rem auto 2rem;
   color: #cce7ed;
+  text-shadow: 0 0 4px rgba(0,188,212,0.4);
 }
 
+/* Buttons */
 .btn {
-  padding: 0.7rem 1.5rem;
-  border-radius: 5px;
+  padding: 0.8rem 1.8rem;
+  border-radius: 8px;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 700;
   transition: all 0.3s;
-  display: inline-block;
   margin-right: 1rem;
+  display: inline-block;
 }
-
 .btn.primary {
   background: #00bcd4;
   color: #0b1e2d;
+  box-shadow: 0 0 15px rgba(0,188,212,0.6);
+  transform: translateZ(0);
 }
-
 .btn.primary:hover {
   background: #007ea7;
   color: #e0f7fa;
+  box-shadow: 0 0 25px rgba(0,188,212,0.9);
+  transform: scale(1.05);
 }
-
 .btn.ghost {
   background: transparent;
   border: 2px solid #00bcd4;
   color: #00bcd4;
+  box-shadow: 0 0 10px rgba(0,188,212,0.5);
 }
-
 .btn.ghost:hover {
   background: #00bcd4;
   color: #0b1e2d;
+  box-shadow: 0 0 20px rgba(0,188,212,0.8);
+  transform: scale(1.05);
 }
 
+/* Tags */
 .specimen-tags {
   display: flex;
   gap: 1rem;
@@ -152,172 +181,96 @@ body[data-theme='dark'] {
   margin-top: 2rem;
   flex-wrap: wrap;
 }
-
 .specimen-tag {
   background: rgba(255,255,255,0.1);
-  padding: 0.4rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-size: 1rem;
   color: #b2ebf2;
+  box-shadow: 0 0 8px rgba(0,188,212,0.5);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.specimen-tag:hover {
+  box-shadow: 0 0 20px rgba(0,188,212,0.9);
+  transform: scale(1.05);
 }
 
+/* Sections */
 .section {
-  padding: 4rem 0;
+  padding: 5rem 2rem;
+  position: relative;
 }
-
-.section-dark {
-  background: rgba(0, 0, 0, 0.2);
-}
-
-.project-card, .nautical-card {
-  background: rgba(0, 188, 212, 0.1);
-  padding: 1.5rem;
-  border-radius: 10px;
-  margin-bottom: 2rem;
-  transition: transform 0.3s;
-}
-
-.project-card:hover, .nautical-card:hover {
-  transform: translateY(-5px);
-  background: rgba(0, 188, 212, 0.2);
-}
-
-.nautical-note {
-  background: rgba(0, 188, 212, 0.05);
-  padding: 1rem 1.5rem;
-  border-left: 4px solid #00bcd4;
-  margin-bottom: 1.5rem;
-  border-radius: 5px;
-}
-
-.contact-links a {
-  display: inline-block;
-  margin-right: 1rem;
-  padding: 0.6rem 1rem;
-  background: #00bcd4;
-  color: #0b1e2d;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.contact-links a:hover {
-  background: #007ea7;
-  color: #e0f7fa;
-}
-
-/* Floating ship animation */
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: 10%;
-  left: -10%;
-  width: 100px;
-  height: 50px;
-  background: url('ship.svg') no-repeat center/contain;
-  animation: sail 20s linear infinite;
-  z-index: 0;
-}
-
-@keyframes sail {
-  0% { transform: translateX(0) translateY(0); }
-  50% { transform: translateX(110vw) translateY(-10px); }
-  100% { transform: translateX(220vw) translateY(0); }
-}
-
-/* Nautical-style typography and gradients */
-/* Fix vendor prefix warning */
-.hero-content h1 {
-  background: linear-gradient(90deg, #00bcd4, #007ea7);
-  -webkit-background-clip: text;
-  background-clip: text; /* standard property for compatibility */
-  -webkit-text-fill-color: transparent;
-}
-
 .section h2 {
-  color: #00bcd4;
-  border-bottom: 2px solid #007ea7;
-  display: inline-block;
-  margin-bottom: 2rem;
+  font-weight: 700;
+  font-size: 2.8rem;
+  margin-bottom: 2.5rem;
+  color: #b2ebf2;
+  text-align: center;
+  text-shadow: 0 0 6px rgba(0,188,212,0.5);
 }
-
-/* Slight sea-wave background effect for sections */
-.section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('wave-texture.svg') repeat;
-  opacity: 0.02;
-  z-index: -1;
-}
-
-/* Project cards gradient highlight */
 .nautical-card {
   background: linear-gradient(135deg, rgba(0,188,212,0.1), rgba(0,123,167,0.15));
   border: 1px solid rgba(0,188,212,0.3);
+  padding: 1.8rem;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  transition: transform 0.4s, box-shadow 0.4s;
 }
-
 .nautical-card:hover {
+  transform: translateY(-8px) rotateX(2deg);
   background: linear-gradient(135deg, rgba(0,188,212,0.2), rgba(0,123,167,0.25));
-  box-shadow: 0 5px 15px rgba(0,188,212,0.3);
+  box-shadow: 0 10px 25px rgba(0,188,212,0.4);
 }
-
-/* Notes subtle shadow */
 .nautical-note {
-  box-shadow: 0 2px 10px rgba(0,188,212,0.1);
+  background: rgba(0,188,212,0.05);
+  padding: 1.2rem 1.8rem;
+  border-left: 4px solid #00bcd4;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,188,212,0.15);
 }
 
-/* Nautical Updates: Waves, Glow, Parallax */
-
-/* Hero waves animation */
-.wave-layer {
-  position: absolute;
-  bottom: 0;
-  width: 200%;
-  height: 20%;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 43%;
-  animation: wave-move 12s linear infinite;
-  z-index: -1;
+/* Images */
+.section .image img {
+  max-width: 100%;
+  border-radius: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
-.wave-layer:nth-child(2) { animation-duration: 10s; opacity: 0.03; }
-.wave-layer:nth-child(3) { animation-duration: 14s; opacity: 0.02; }
-
-@keyframes wave-move {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+.section .image img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 15px rgba(0,188,212,0.3);
 }
 
-/* Button glow effect */
-.btn.primary, .btn.ghost {
-  box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+/* Contact Links */
+.contact-links a {
+  display: inline-block;
+  margin-right: 1rem;
+  padding: 0.7rem 1.3rem;
+  background: #00bcd4;
+  color: #0b1e2d;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(0,188,212,0.6);
   transition: all 0.3s;
 }
-.btn.primary:hover, .btn.ghost:hover {
-  box-shadow: 0 0 20px rgba(0, 188, 212, 0.8);
+.contact-links a:hover {
+  background: #007ea7;
+  color: #e0f7fa;
+  box-shadow: 0 0 25px rgba(0,188,212,0.9);
+  transform: scale(1.05);
 }
 
-/* Tag glow effect */
-.specimen-tag {
-  box-shadow: 0 0 5px rgba(0, 188, 212, 0.4);
-  transition: box-shadow 0.3s;
-}
-.specimen-tag:hover {
-  box-shadow: 0 0 15px rgba(0, 188, 212, 0.8);
-}
-
-/* Parallax background for hero */
-.hero-bg { transform: translateZ(0); will-change: transform; }
-
-/* Smooth scroll */
-html {
-  scroll-behavior: smooth;
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: rgba(11,30,45,0.85);
+  color: #b2ebf2;
+  text-shadow: 0 0 5px rgba(0,188,212,0.5);
 }
 
-/* Particles for hero section */
+/* Particle Animation */
 #particle-container {
   position: absolute;
   width: 100%;
@@ -328,16 +281,38 @@ html {
   overflow: hidden;
   z-index: -1;
 }
-
 .particle {
   position: absolute;
   background: rgba(255,255,255,0.2);
   border-radius: 50%;
   will-change: transform;
-  animation: drift 20s infinite linear;
+  animation: drift 25s infinite linear;
 }
-
 @keyframes drift {
   0% { transform: translate(0, 0); }
-  100% { transform: translate(100px, 100px); }
+  100% { transform: translate(120px, 120px) rotate(360deg); }
 }
+
+/* Floating Ship */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 10%;
+  left: -10%;
+  width: 120px;
+  height: 60px;
+  background: url('ship.svg') no-repeat center/contain;
+  animation: sail 25s linear infinite;
+  z-index: 0;
+}
+@keyframes sail {
+  0% { transform: translateX(0) translateY(0) rotate(0deg); }
+  50% { transform: translateX(110vw) translateY(-10px) rotate(3deg); }
+  100% { transform: translateX(220vw) translateY(0) rotate(0deg); }
+}
+
+/* Smooth Scroll */
+html { scroll-behavior: smooth; }
+
+/* Additional Parallax & Glow */
+.hero-bg, .wave-layer { will-change: transform; }

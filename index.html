@@ -4,33 +4,45 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Portfolio of Axel Wyrick-Ehard, full-stack developer specializing in elegant, efficient web applications." />
-  <title>Axel Wyrick-Ehard | Full-Stack Developer</title>
+  <title>Axel Wyrick-Ehard | Nautical Portfolio</title>
+
   <link rel="icon" href="/favicon.ico" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 <body>
+
   <header class="header sticky">
     <div class="container flex-between">
       <div class="logo">Axel W.</div>
       <nav>
         <ul class="nav-list">
+          <li><a href="#hero">Home</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-      <button id="theme-toggle">🌓</button>
+      <button id="theme-toggle" aria-label="Toggle dark mode">🌓</button>
     </div>
   </header>
 
   <section id="hero" class="hero">
     <div class="hero-bg nautical-gradient"></div>
-    <div class="wave-animation"></div>
+    <div class="wave-layer wave1"></div>
+    <div class="wave-layer wave2"></div>
+    <div class="wave-layer wave3"></div>
+
     <div class="container hero-content">
       <p class="eyebrow">Field Station — Expedition Log</p>
-      <h1>Axel Wyrick-Ehard <span>Computational Cartographer & Digital Naturalist</span></h1>
+      <h1>Axel Wyrick-Ehard<span>Computational Cartographer & Digital Naturalist</span></h1>
       <p class="lead">I design procedural ecosystems, refactor ancient code archives, and map computational terrains. Current focus: bathymetric-aware rivers, modular biomes, and ecological sub-hierarchies.</p>
-      <div class="btn-group">
+      <div>
         <a href="#projects" class="btn primary">Enter the Chartroom</a>
         <a href="#field-notes" class="btn ghost">Read Field Notes</a>
       </div>
@@ -40,77 +52,51 @@
         <span class="specimen-tag">Status: Active Study</span>
       </div>
     </div>
-    <div id="particle-container">
-      <!-- Ensure sonar element is correctly placed -->
-      <div id="sonar" class="absolute w-48 h-48 rounded-full pointer-events-none">
-      <svg viewBox="0 0 200 200" class="w-full h-full">
-      <circle cx="100" cy="100" r="10" fill="none" stroke="#00bcd4" stroke-width="2" opacity="0.9"/>
-      <circle cx="100" cy="100" r="10" fill="none" stroke="#00bcd4" stroke-width="1" opacity="0.6"/>
-      </svg>
+
+    <div id="particle-container"></div>
+  </section>
+
+  <section id="projects" class="section projects">
+    <div class="container">
+      <h2>Projects 🗺️</h2>
+      <div class="nautical-card">
+        <h3>Cartomancer</h3>
+        <p>A procedural map generator with rule-based biomes, bathymetry-aware rivers, and layered ecosystems.</p>
+        <a href="#" class="btn ghost">Explore Project</a>
+      </div>
+      <div class="nautical-card">
+        <h3>Monster Hunter Data Pipeline</h3>
+        <p>Custom scripts to extract, normalize, and visualize game data across generations.</p>
+        <a href="#" class="btn ghost">View Pipeline</a>
       </div>
     </div>
   </section>
 
-  <section id="now" class="section">
-    <div class="container">
-      <h2>What I'm Working On Now 🧭</h2>
-      <ul class="now-list">
-        <li>🌐 Overhauling my portfolio to reflect my love of marine biology and paleontology</li>
-        <li>🧪 Expanding Cartomancer’s biome system with modular definitions and rule-based assignment</li>
-        <li>🦖 Designing a sub-biome hierarchy for better terrain realism.</li>
-        <li>📸 Exploring ways to visualize terrain overlays and elevation data more intuitively</li>
-      </ul>
-      <p class="now-note">Updated October 2025. Inspired by <a href="https://nownownow.com" target="_blank">nownownow.com</a>.</p>
-    </div>
-  </section>
-
-  <section id="field-notes" class="section">
-    <div class="container">
-      <h2>Field Notes 🧪</h2>
-      <div class="nautical-note">Refactoring Azgaar’s original codebase was like dredging a sunken archive. Modularized biomes, added Alpine, Volcanic, Mangrove types, and improved elevation-aware rivers.</div>
-      <div class="nautical-note">Reverse-engineered Monster Hunter data to extract monster stats, weapon trees, and quest metadata. Organized via MediaWiki templates for scalability.</div>
-    </div>
-  </section>
-
-  <section id="skills" class="section">
-    <div class="container">
-      <h2>Skills & Tools 🧰</h2>
-      <div class="skills-grid">
-        <div class="skill-group">
-          <h3>Languages</h3>
-          <ul><li>Python</li><li>JavaScript</li><li>TypeScript</li><li>C#</li></ul>
-        </div>
-        <div class="skill-group">
-          <h3>Frameworks</h3>
-          <ul><li>Vue.js</li><li>Next.js</li><li>Tailwind CSS</li><li>MediaWiki</li></ul>
-        </div>
-        <div class="skill-group">
-          <h3>Tools & Systems</h3>
-          <ul><li>Git & GitHub</li><li>Blender</li><li>Figma</li><li>Custom Data Pipelines</li></ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="about" class="section">
+  <section id="about" class="section about">
     <div class="container flex">
-      <img src="/img/about_me.jpg" alt="Portrait of Axel Wyrick-Ehard" />
+      <div class="image">
+        <img src="/img/about_me.jpg" alt="Portrait of Axel Wyrick-Ehard" />
+      </div>
       <div class="text">
         <h2>About Me</h2>
-        <p>Self-taught full-stack developer passionate about turning complex problems into elegant solutions. Specializes in Python, JavaScript, and Vue.js.</p>
-        <p>Outside coding: photography, hiking, and family time.</p>
+        <p>I’m a self-taught full-stack developer with a passion for turning complex problems into elegant solutions. I specialize in Python, JavaScript, HTML, and CSS.</p>
+        <p>I geek out on marine biology (coastal ecosystems, weird species!),
+          paleontology (fossil hunting and ‘time travel’),
+          and photography (turning nature into cool visual stories).
+          On the side, I try sustainable sewing projects and collect Pokémon cards
+          to spot patterns in pop culture trends — it’s science in my pajamas!</p>
       </div>
     </div>
   </section>
 
-  <section id="contact" class="section">
+  <section id="contact" class="section contact">
     <div class="container">
       <h2>Get in Touch</h2>
-      <p>Available for freelance and full-time opportunities. Let’s build something great together.</p>
+      <p>I’m available for freelance and full-time opportunities. Let’s build something great together.</p>
       <div class="contact-links">
         <a href="mailto:jixleyy@gmail.com" class="btn">Email Me</a>
-        <a href="https://linkedin.com/in/yourprofile" class="btn" target="_blank">LinkedIn</a>
-        <a href="https://github.com/jixleyy" class="btn" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/yourprofile" class="btn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/jixleyy" class="btn" target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
     </div>
   </section>
@@ -121,6 +107,24 @@
     </div>
   </footer>
 
-  <script src="/assets/js/main.js"></script>
+  <script>
+    // Particle Animation
+    const particleContainer = document.getElementById('particle-container');
+    const numParticles = 30;
+
+    for(let i = 0; i < numParticles; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.width = `${Math.random() * 4 + 2}px`;
+      particle.style.height = particle.style.width;
+      particle.style.top = `${Math.random() * 100}%`;
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.animationDuration = `${10 + Math.random() * 20}s`;
+      particle.style.opacity = Math.random();
+      particleContainer.appendChild(particle);
+    }
+  </script>
+
+  <script src="/assets/js/main.js" defer></script>
 </body>
 </html>
