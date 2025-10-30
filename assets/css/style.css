@@ -1,65 +1,271 @@
-/* Base Reset */
-* { margin:0; padding:0; box-sizing:border-box; }
-html, body { font-family: 'Inter', sans-serif; background-color: #0F172A; color: #FFFFFF; scroll-behavior: smooth; }
-a { text-decoration: none; }
-ul { list-style:none; }
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
 
-/* Containers */
-.container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-.section { padding: 4rem 0; }
-.section-dark { background-color: #1E293B; }
+body[data-theme='dark'] {
+  background-color: #0b1e2d;
+  color: #e0f7fa;
+}
 
-/* Header */
-.header { position: sticky; top: 0; z-index: 50; background-color: #0F172A; padding: 1rem 0; display: flex; justify-content: space-between; align-items: center; }
-.nav-list { display: flex; gap: 1.5rem; }
-.nav-list a { color: rgba(255,255,255,0.8); font-weight: 500; transition: 0.2s; }
-.nav-list a:hover { color: #3B82F6; }
-.logo { font-weight: 700; font-size: 1.25rem; color: #FFFFFF; }
-#theme-toggle { background:none; border:none; font-size:1.25rem; cursor:pointer; }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+}
 
-/* Hero */
-.hero { position: relative; min-height: 90vh; display: flex; align-items: center; overflow: hidden; }
-.hero-bg { position: absolute; inset:0; background: linear-gradient(180deg, #1E3A8A 0%, #0F172A 100%); z-index:1; }
-.hero-content { position: relative; z-index: 10; }
-.eyebrow { text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-bottom: 0.5rem; }
-h1 { font-size: 3rem; font-weight: 800; line-height:1.1; margin-bottom: 1rem; }
-h1 span { font-weight: 500; font-size: 1.25rem; display:block; color: rgba(255,255,255,0.6); }
-.lead { font-size: 1.125rem; color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; }
-.buttons { display:flex; gap:1rem; }
-.specimen-tag { background-color: rgba(255,255,255,0.1); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size:0.75rem; }
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  background: rgba(11, 30, 45, 0.8);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
 
-/* Sections */
-.section h2 { font-size: 2rem; font-weight:700; margin-bottom:1.5rem; }
-.section-dark h2 { color: #FFFFFF; }
+.logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #00bcd4;
+}
 
-/* Projects Grid */
-#projects-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:1.5rem; }
-.project-card { background-color: #1E293B; padding:1.5rem; border-radius:0.5rem; transition: transform 0.2s; }
-.project-card:hover { transform: translateY(-4px); }
-.project-card h3 { font-size:1.25rem; font-weight:600; margin-bottom:0.5rem; }
-.project-card p { font-size:0.95rem; color: rgba(255,255,255,0.7); margin-bottom:0.5rem; }
+.nav-list {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
 
-/* Field Notes */
-#field-notes-log article { margin-bottom: 2rem; }
-#field-notes-log h3 { font-size: 1.25rem; font-weight:600; margin-bottom:0.25rem; }
-#field-notes-log .date { font-size:0.85rem; color: rgba(255,255,255,0.5); margin-bottom:0.5rem; }
-#field-notes-log p { color: rgba(255,255,255,0.7); }
+.nav-list a {
+  color: #e0f7fa;
+  text-decoration: none;
+  transition: color 0.3s;
+}
 
-/* Skills Grid */
-#skills-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:1.5rem; }
-.skill-group h3 { font-size:1rem; font-weight:600; margin-bottom:0.5rem; }
-.skill-group ul li { color: rgba(255,255,255,0.7); font-size:0.875rem; margin-bottom:0.25rem; }
+.nav-list a:hover {
+  color: #00bcd4;
+}
 
-/* Contact */
-.contact-links { display:flex; gap:1rem; flex-wrap:wrap; }
-.contact-links a { padding:0.5rem 1rem; border-radius:0.375rem; background-color:#3B82F6; color:white; transition:0.2s; }
-.contact-links a:hover { opacity:0.8; }
+.hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  overflow: hidden;
+}
 
-/* Footer */
-.footer { background-color: #0F172A; padding: 2rem 0; color: rgba(255,255,255,0.5); text-align:center; font-size:0.875rem; }
+.hero-bg.nautical-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(160deg, #003b5c, #007ea7, #00bcd4);
+  z-index: -2;
+}
 
-/* Responsive */
-@media(max-width:768px){
-  h1 { font-size:2rem; }
-  h1 span { font-size:1rem; }
+.wave-animation {
+  position: absolute;
+  bottom: 0;
+  width: 200%;
+  height: 20%;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 43%;
+  animation: wave 8s infinite linear;
+  z-index: -1;
+}
+
+@keyframes wave {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.hero-content .eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 1rem;
+  color: #b2ebf2;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #e0f7fa;
+}
+
+.hero-content h1 span {
+  font-size: 1.5rem;
+  color: #b2ebf2;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.hero-content .lead {
+  max-width: 600px;
+  margin: 1rem auto 2rem;
+  color: #cce7ed;
+}
+
+.btn {
+  padding: 0.7rem 1.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s;
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.btn.primary {
+  background: #00bcd4;
+  color: #0b1e2d;
+}
+
+.btn.primary:hover {
+  background: #007ea7;
+  color: #e0f7fa;
+}
+
+.btn.ghost {
+  background: transparent;
+  border: 2px solid #00bcd4;
+  color: #00bcd4;
+}
+
+.btn.ghost:hover {
+  background: #00bcd4;
+  color: #0b1e2d;
+}
+
+.specimen-tags {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.specimen-tag {
+  background: rgba(255,255,255,0.1);
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #b2ebf2;
+}
+
+.section {
+  padding: 4rem 0;
+}
+
+.section-dark {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.project-card, .nautical-card {
+  background: rgba(0, 188, 212, 0.1);
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  transition: transform 0.3s;
+}
+
+.project-card:hover, .nautical-card:hover {
+  transform: translateY(-5px);
+  background: rgba(0, 188, 212, 0.2);
+}
+
+.nautical-note {
+  background: rgba(0, 188, 212, 0.05);
+  padding: 1rem 1.5rem;
+  border-left: 4px solid #00bcd4;
+  margin-bottom: 1.5rem;
+  border-radius: 5px;
+}
+
+.contact-links a {
+  display: inline-block;
+  margin-right: 1rem;
+  padding: 0.6rem 1rem;
+  background: #00bcd4;
+  color: #0b1e2d;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contact-links a:hover {
+  background: #007ea7;
+  color: #e0f7fa;
+}
+
+/* Floating ship animation */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 10%;
+  left: -10%;
+  width: 100px;
+  height: 50px;
+  background: url('ship.svg') no-repeat center/contain;
+  animation: sail 20s linear infinite;
+  z-index: 0;
+}
+
+@keyframes sail {
+  0% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(110vw) translateY(-10px); }
+  100% { transform: translateX(220vw) translateY(0); }
+}
+
+/* Nautical-style typography and gradients */
+/* Fix vendor prefix warning */
+.hero-content h1 {
+  background: linear-gradient(90deg, #00bcd4, #007ea7);
+  -webkit-background-clip: text;
+  background-clip: text; /* standard property for compatibility */
+  -webkit-text-fill-color: transparent;
+}
+
+.section h2 {
+  color: #00bcd4;
+  border-bottom: 2px solid #007ea7;
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+
+/* Slight sea-wave background effect for sections */
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('wave-texture.svg') repeat;
+  opacity: 0.02;
+  z-index: -1;
+}
+
+/* Project cards gradient highlight */
+.nautical-card {
+  background: linear-gradient(135deg, rgba(0,188,212,0.1), rgba(0,123,167,0.15));
+  border: 1px solid rgba(0,188,212,0.3);
+}
+
+.nautical-card:hover {
+  background: linear-gradient(135deg, rgba(0,188,212,0.2), rgba(0,123,167,0.25));
+  box-shadow: 0 5px 15px rgba(0,188,212,0.3);
+}
+
+/* Notes subtle shadow */
+.nautical-note {
+  box-shadow: 0 2px 10px rgba(0,188,212,0.1);
 }
