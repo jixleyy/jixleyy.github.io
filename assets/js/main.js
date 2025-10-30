@@ -1,73 +1,42 @@
-// Simple JS to dynamically load projects, notes, and skills
+// Interactive Sonar Ping and Drifting Particles
 
-async function loadJSON(path) {
-  const res = await fetch(path);
-  return await res.json();
-}
-
-function renderProjects(projects) {
-  const grid = document.getElementById('projects-grid');
-  grid.innerHTML = projects.map(p => `
-    <div class="project-card">
-      <h3>${p.title}</h3>
-      <p>${p.description}</p>
-      <a href="${p.link}" class="btn primary" target="_blank">View</a>
-    </div>
-  `).join('');
-}
-
-function renderNotes(notes) {
-  const container = document.getElementById('field-notes-log');
-  container.innerHTML = notes.map(n => `
-    <article>
-      <h3>${n.title}</h3>
-      <p class="date">${n.date}</p>
-      <p>${n.content}</p>
-    </article>
-  `).join('');
-}
-
-function renderSkills(skills) {
-  const grid = document.getElementById('skills-grid');
-  grid.innerHTML = skills.map(s => `
-    <div class="skill-group">
-      <h3>${s.name}</h3>
-      <ul>
-        ${s.skills.map(skill => `<li>${skill}</li>`).join('')}
-      </ul>
-    </div>
-  `).join('');
-}
-
-async function init() {
-  const projects = await loadJSON('projects.json');
-  const notes = await loadJSON('notes.json');
-  const skills = await loadJSON('skills.json');
-
-  renderProjects(projects);
-  renderNotes(notes);
-  renderSkills(skills);
-}
-
-init();
-
-const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll(".nav-list a");
-
-window.addEventListener("scroll", () => {
-  let current = "";
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop;
-    if (pageYOffset >= sectionTop - 60) current = section.getAttribute("id");
-  });
-  navLinks.forEach(link => {
-    link.classList.remove("active");
-    if (link.getAttribute("href") === "#" + current) link.classList.add("active");
-  });
+// Sonar ping following cursor
+const sonar = document.getElementById('sonar');
+document.addEventListener('mousemove', (e) => {
+  const rect = sonar.parentElement.getBoundingClientRect();
+  const x = e.clientX - rect.left - sonar.offsetWidth/2;
+  const y = e.clientY - rect.top - sonar.offsetHeight/2;
+  sonar.style.transform = `translate(${x}px, ${y}px)`;
 });
 
-const themeToggle = document.getElementById("theme-toggle");
-themeToggle.addEventListener("click", () => {
-  document.documentElement.dataset.theme =
-    document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-});
+// Simple drifting particles
+const hero = document.getElementById('hero');
+const particleCount = 50;
+const particles = [];
+
+for (let i = 0; i < particleCount; i++) {
+  const particle = document.createElement('div');
+  particle.className = 'particle';
+  particle.style.left = Math.random() * 100 + '%';
+  particle.style.top = Math.random() * 100 + '%';
+  particle.style.width = particle.style.height = (Math.random() * 3 + 2) + 'px';
+  hero.appendChild(particle);
+  particles.push({el: particle, speedX: (Math.random()-0.5)/2, speedY: (Math.random()-0.5)/2});
+}
+
+function animateParticles() {
+  particles.forEach(p => {
+    let top = parseFloat(p.el.style.top);
+    let left = parseFloat(p.el.style.left);
+    top += p.speedY;
+    left += p.speedX;
+    if (top < 0) top = 100;
+    if (top > 100) top = 0;
+    if (left < 0) left = 100;
+    if (left > 100) left = 0;
+    p.el.style.top = top + '%';
+    p.el.style.left = left + '%';
+  });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();

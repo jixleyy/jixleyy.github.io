@@ -269,3 +269,75 @@ body[data-theme='dark'] {
 .nautical-note {
   box-shadow: 0 2px 10px rgba(0,188,212,0.1);
 }
+
+/* Nautical Updates: Waves, Glow, Parallax */
+
+/* Hero waves animation */
+.wave-layer {
+  position: absolute;
+  bottom: 0;
+  width: 200%;
+  height: 20%;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 43%;
+  animation: wave-move 12s linear infinite;
+  z-index: -1;
+}
+.wave-layer:nth-child(2) { animation-duration: 10s; opacity: 0.03; }
+.wave-layer:nth-child(3) { animation-duration: 14s; opacity: 0.02; }
+
+@keyframes wave-move {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Button glow effect */
+.btn.primary, .btn.ghost {
+  box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+  transition: all 0.3s;
+}
+.btn.primary:hover, .btn.ghost:hover {
+  box-shadow: 0 0 20px rgba(0, 188, 212, 0.8);
+}
+
+/* Tag glow effect */
+.specimen-tag {
+  box-shadow: 0 0 5px rgba(0, 188, 212, 0.4);
+  transition: box-shadow 0.3s;
+}
+.specimen-tag:hover {
+  box-shadow: 0 0 15px rgba(0, 188, 212, 0.8);
+}
+
+/* Parallax background for hero */
+.hero-bg { transform: translateZ(0); will-change: transform; }
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Particles for hero section */
+#particle-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  will-change: transform;
+  animation: drift 20s infinite linear;
+}
+
+@keyframes drift {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(100px, 100px); }
+}
