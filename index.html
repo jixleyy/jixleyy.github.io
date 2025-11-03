@@ -24,34 +24,15 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <header>
-        <div class="wii-menu-bar">
-            <div class="wii-menu-item home-button" title="Home">
-                <a href="#home" class="wii-icon-btn" data-channel="home">
-                    <span class="pixel-icon">⌂</span>
-                </a>
-            </div>
-            <div class="wii-menu-item settings-button" title="Settings">
-                <a href="#settings" class="wii-icon-btn" data-channel="settings">
-                    <span class="pixel-icon">⚙</span>
-                </a>
-            </div>
-            <div class="wii-menu-item mii-button" title="Mii">
-                <a href="#about" class="wii-icon-btn" data-channel="about">
-                    <span class="pixel-icon">☺</span>
-                </a>
-            </div>
+    <div id="ds-console" class="ds-console">
+        <div class="ds-screen ds-screen-top">
+            <h1 class="ds-top-screen-title">Jixleyy's Portfolio</h1>
+            <p class="ds-top-screen-tagline">Whimsical Web Experiences</p>
         </div>
-        <div class="wii-menu-controls">
-            <div class="theme-switcher gravity-element">
-                <input type="checkbox" id="theme-toggle" class="theme-toggle" aria-label="Toggle light and dark theme">
-                <label for="theme-toggle" class="theme-toggle-label" title="Toggle Theme"></label>
-            </div>
-            <div class="sound-switcher gravity-element">
-                <input type="checkbox" id="sound-toggle" class="sound-toggle" aria-label="Toggle sound effects">
-                <label for="sound-toggle" class="sound-toggle-label" title="Toggle Sound Effects"></label>
-            </div>
-        </div>
+        <div id="ds-screen-bottom" class="ds-screen ds-screen-bottom">
+            <header>
+
+
     </header>
 
     <main>
@@ -121,7 +102,7 @@
                 </a>
                 
                 <!-- Settings Channel -->
-                <a href="#settings" class="channel-tile" data-channel="settings">
+                <a href="javascript:void(0)" class="channel-tile" data-channel="settings">
                     <div class="channel-icon-image blue">
                         <span class="pixel-icon">⚙</span>
                     </div>
@@ -246,19 +227,6 @@
                 <h2 class="breathe-animation">About Me</h2>
                 <div class="about-card breathe-animation squishy-element">
                     <div class="about-avatar-placeholder eye-tracking" style="position: relative; width: 120px; height: 120px; margin: 0 auto;">
-                        <div class="mii-container">
-                            <div class="mii-hat"></div>
-                            <div class="mii-head">
-                                <div class="mii-face">
-                                    <div class="mii-eyes">
-                                        <div class="mii-eye"></div>
-                                        <div class="mii-eye"></div>
-                                    </div>
-                                    <div class="mii-mouth"></div>
-                                </div>
-                            </div>
-                            <div class="mii-body"></div>
-                        </div>
                     </div>
                     <p>Hello! I'm Jixleyy, a passionate web developer who loves crafting delightful and intuitive digital experiences. I enjoy bringing ideas to life with clean code and creative design, always striving for that perfect blend of functionality and fun. My approach is always to blend aesthetic appeal with seamless user interaction, ensuring every project is not just functional, but also a joy to use.</p>
                     <p class="fun-fact">Fun Fact: I once tried to teach my cat to code. It didn't go well, but we both learned a lot about patience!</p>
@@ -346,24 +314,24 @@
                     </div>
 
                     <h3>Send a Message</h3>
-                    <form class="contact-form" action="#" method="POST">
-                        <div class="form-group wii-form-group">
+                    <form class="contact-form" action="#" method="POST" novalidate>
+                        <div class="form-group">
                             <label for="name">Name:</label>
-                            <input type="text" id="name" name="name" required class="wii-input">
+                            <input type="text" id="name" name="name" required class="">
                         </div>
-                        <div class="form-group wii-form-group">
+                        <div class="form-group">
                             <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" required class="wii-input">
+                            <input type="email" id="email" name="email" required class="">
                         </div>
-                        <div class="form-group wii-form-group">
+                        <div class="form-group">
                             <label for="subject">Subject:</label>
-                            <input type="text" id="subject" name="subject" class="wii-input">
+                            <input type="text" id="subject" name="subject" class="">
                         </div>
-                        <div class="form-group wii-form-group">
+                        <div class="form-group">
                             <label for="message">Message:</label>
-                            <textarea id="message" name="message" rows="5" required class="wii-input"></textarea>
+                            <textarea id="message" name="message" rows="5" required class=""></textarea>
                         </div>
-                        <button type="submit" class="submit-button squishy-interaction gravity-element wii-button">Send Message</button>
+                        <button type="submit" class="submit-button squishy-interaction gravity-element">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -432,8 +400,6 @@
 
     </main>
 
-    </main>
-
     <footer>
         <div class="system-footer">
             <p>✦ Licensed for Web Use ✦</p>
@@ -449,6 +415,8 @@
             <span class="pixel-icon">🍄</span>
         </div>
     </footer>
+        </div> <!-- Close ds-screen-bottom -->
+    </div> <!-- Close ds-console -->
 
     <div class="floating-cursor-icon"></div>
 
@@ -472,7 +440,7 @@
             <span class="close-button error-close-button">&times;</span>
             <h3 id="error-modal-title"></h3>
             <p id="error-modal-message"></p>
-            <button class="wii-button error-ok-button">OK</button>
+            <button class="error-ok-button">OK</button>
         </div>
     </div>
 
@@ -496,23 +464,7 @@
                 <button id="close-settings" class="close-settings-btn">&times;</button>
             </div>
             <div class="settings-content">
-                <div class="settings-option">
-                    <label class="setting-label">Theme Color</label>
-                    <div class="theme-options">
-                        <button class="theme-btn active" data-theme="blue" aria-label="Blue theme">
-                            <span class="theme-color" style="background-color: #0078D7;"></span>
-                            <span>Blue</span>
-                        </button>
-                        <button class="theme-btn" data-theme="pink" aria-label="Pink theme">
-                            <span class="theme-color" style="background-color: #FF69B4;"></span>
-                            <span>Pink</span>
-                        </button>
-                        <button class="theme-btn" data-theme="green" aria-label="Green theme">
-                            <span class="theme-color" style="background-color: #4CAF50;"></span>
-                            <span>Green</span>
-                        </button>
-                    </div>
-                </div>
+
                 
 
                 
