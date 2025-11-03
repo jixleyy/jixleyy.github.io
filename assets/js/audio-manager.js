@@ -46,8 +46,8 @@ class AudioManager {
       if (savedAmbientEnabledFromSettings !== null) {
         this.ambientEnabled = savedAmbientEnabledFromSettings === 'true';
       } else {
-        // Default to true for ambient music
-        this.ambientEnabled = true;
+        // Default to false for ambient music
+        this.ambientEnabled = false;
       }
     }
 
@@ -94,7 +94,7 @@ class AudioManager {
       case 'hover':
         frequency = 880; // A5
         duration = 0.05;
-        type = 'sine';
+        type = 'square';
         volume = 0.3;
         break;
       case 'click':
@@ -106,13 +106,13 @@ class AudioManager {
       case 'expand':
         frequency = 660; // E5
         duration = 0.1;
-        type = 'sine';
+        type = 'square';
         volume = 0.4;
         break;
       case 'pageLoad':
         frequency = 550; // C#5
         duration = 0.15;
-        type = 'sine';
+        type = 'square';
         volume = 0.6;
         break;
       case 'notification':
@@ -130,14 +130,40 @@ class AudioManager {
       case 'airClick':
         frequency = 1320; // E6
         duration = 0.03;
-        type = 'sine';
+        type = 'square';
         volume = 0.2;
+        break;
+      case 'select':
+        frequency = 660; // E5
+        duration = 0.08;
+        type = 'square';
+        volume = 0.5;
+        break;
+      case 'bootUpChimePart1': // Internal part of boot-up chime
+        frequency = 440; // A4
+        duration = 0.15;
+        type = 'square';
+        volume = 0.6;
+        break;
+      case 'bootUpChimePart2': // Internal part of boot-up chime
+        frequency = 660; // E5
+        duration = 0.2;
+        type = 'square';
+        volume = 0.6;
         break;
       default:
         console.warn(`Unknown sound name: ${soundName}`);
         return;
     }
     this.generateTone(frequency, duration, type, volume);
+  }
+
+  playBootUpChime() {
+    if (!this.soundEnabled || !this.audioContext) return;
+    this.playSound('bootUpChimePart1');
+    setTimeout(() => {
+      this.playSound('bootUpChimePart2');
+    }, 150); // Play second part after 150ms
   }
 
   // Play ambient sound (looping background sound)

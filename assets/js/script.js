@@ -8,18 +8,52 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Function to hide the loading screen
+    // Function to hide the loading screen with a fade-out effect
     function hideLoadingScreen() {
         if (loadingScreen) {
-            loadingScreen.classList.add('hidden');
+            loadingScreen.classList.add('hidden'); // Start fade-out
+            // Wait for the CSS transition to complete before setting display: none
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+
+                if (window.audioManager) window.audioManager.playBootUpChime();
+
+                // Show boot-up message after loading screen is hidden
+                const bootUpMessage = document.getElementById('boot-up-message');
+                if (bootUpMessage) {
+                    bootUpMessage.classList.add('visible');
+                    setTimeout(() => {
+                        bootUpMessage.classList.remove('visible');
+                    }, 2000); // Display for 2 seconds
+                }
+            }, 500); // 0.5s matches the CSS transition duration
+        }
+    }
+
+    // Generic function to close any modal
+    function closeModal(modalElement) {
+        if (modalElement) {
+            modalElement.classList.remove('active');
+            BODY.style.overflow = '';
+
+            // Specific cleanup for project modal
+            if (modalElement.id === 'project-modal') {
+                const videoElement = modalElement.querySelector('video');
+                if (videoElement) videoElement.pause();
+            }
+            
+            // Play exit sound only if it's the settings modal
+            if (modalElement.id === 'settings-modal' && window.audioManager) {
+                window.audioManager.playMenuExitSound();
+            }
         }
     }
 
     // Show the loading screen on initial load
     showLoadingScreen();
 
-    // Hide the loading screen after a delay (e.g., 2 seconds)
-    const initialLoadingDelay = window.settingsManager.getSetting('reducedMotion') ? 100 : 2000;
+    // Hide the loading screen after a minimum display time
+    const initialLoadingDelay = window.settingsManager.getSetting('reducedMotion') ? 100 : 1500; // Minimum 1.5 seconds display
     setTimeout(hideLoadingScreen, initialLoadingDelay);
     
     // --- Error Modal Functions ---
@@ -41,28 +75,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function hideSettingsModal() {
-        if (settingsModal) {
-            settingsModal.classList.remove('active');
-            BODY.style.overflow = '';
-            if (window.audioManager) window.audioManager.playMenuExitSound();
-        }
-    }
-
     // Event listeners for settings modal buttons
     if (closeSettingsButton) {
-        closeSettingsButton.addEventListener('click', hideSettingsModal);
+        closeSettingsButton.addEventListener('click', () => closeModal(settingsModal));
     }
     // Close on outside click
     if (settingsModal) {
         settingsModal.addEventListener('click', (e) => {
-            if (e.target === settingsModal) hideSettingsModal();
+            if (e.target === settingsModal) closeModal(settingsModal);
         });
     }
     // Close on Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && settingsModal.classList.contains('active')) {
-            hideSettingsModal();
+            closeModal(settingsModal);
         }
     });
 
@@ -76,30 +102,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function hideErrorModal() {
-        if (errorModal) {
-            errorModal.classList.remove('active');
-            BODY.style.overflow = ''; // Restore scrolling
-        }
-    }
-
     // Event listeners for error modal buttons
     if (errorCloseButton) {
-        errorCloseButton.addEventListener('click', hideErrorModal);
+        errorCloseButton.addEventListener('click', () => closeModal(errorModal));
     }
     if (errorOkButton) {
-        errorOkButton.addEventListener('click', hideErrorModal);
+        errorOkButton.addEventListener('click', () => closeModal(errorModal));
     }
     // Close on outside click
     if (errorModal) {
         errorModal.addEventListener('click', (e) => {
-            if (e.target === errorModal) hideErrorModal();
+            if (e.target === errorModal) closeModal(errorModal);
         });
     }
     // Close on Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && errorModal.classList.contains('active')) {
-            hideErrorModal();
+            closeModal(errorModal);
         }
     });
 
@@ -119,10 +138,15 @@ document.addEventListener('DOMContentLoaded', () => {
 function navigateToChannel(channelId) {
     showLoadingScreen(); // Show loading screen immediately
 
-    const navigationDelay = window.settingsManager.getSetting('reducedMotion') ? 100 : 500; // Reduced delay for reduced motion
-    setTimeout(() => { // Simulate loading time
+    const transitionDuration = window.settingsManager.getSetting('reducedMotion') ? 0 : 300; // 300ms for transition
+    const navigationDelay = window.settingsManager.getSetting('reducedMotion') ? 100 : 500; // Existing delay for content loading
+
+    // Step 1: Start fade-out of current content
+    BODY.classList.add('screen-fade-out');
+
+    setTimeout(() => { // Wait for fade-out to complete before swapping content
         // Hide all sections first
-        ALL_SECTIONS.forEach(section => section.classList.remove('visible'));
+        ALL_SECTIONS.forEach(section => section.classList.remove('visible', 'screen-fade-in')); // Remove screen-fade-in from old section
 
         const targetSection = document.getElementById(channelId);
 
@@ -130,6 +154,12 @@ function navigateToChannel(channelId) {
             targetSection.classList.add('visible');
             // Update URL hash without triggering a full page reload
             history.pushState(null, '', `#${channelId}`);
+
+            // Set focus to the first interactive element in the new channel for accessibility
+            const firstInteractiveElement = targetSection.querySelector('a[href], button, input, textarea, select, [tabindex]:not([tabindex="-1"])');
+            if (firstInteractiveElement) {
+                firstInteractiveElement.focus();
+            }
         } else {
             // If the channelId does not correspond to an existing section, show an error
             showErrorModal("Channel Loading Error!", `The channel "${channelId}" could not be found. Please try again.`);
@@ -137,8 +167,21 @@ function navigateToChannel(channelId) {
             document.getElementById('home').classList.add('visible');
             history.pushState(null, '', '#home');
         }
-        hideLoadingScreen(); // Hide loading screen after navigation
-    }, navigationDelay); // Use navigationDelay here
+
+        // Step 2: Remove fade-out from body and start fade-in for new content section
+        BODY.classList.remove('screen-fade-out');
+        if (targetSection) {
+            targetSection.classList.add('screen-fade-in'); // Apply fade-in to the new section
+        }
+
+        // Step 3: Hide loading screen and remove fade-in after new content is visible and animated
+        setTimeout(() => {
+            hideLoadingScreen();
+            if (targetSection) {
+                targetSection.classList.remove('screen-fade-in'); // Remove fade-in after animation
+            }
+        }, transitionDuration); // Wait for fade-in to complete
+    }, transitionDuration); // Wait for fade-out to complete before swapping
 }
     
     /** Initializes both Wii Channel tiles and DS Bar items */
@@ -151,6 +194,7 @@ function navigateToChannel(channelId) {
 
             item.addEventListener('click', function(e) {
                 e.preventDefault();
+                if (window.audioManager) window.audioManager.playSound('select');
                 
                 // Clear and set active state only on the Wii/DS elements themselves
                 document.querySelectorAll('.channel-tile.active, .ds-bar-item.active').forEach(el => el.classList.remove('active'));
@@ -267,12 +311,12 @@ function navigateToChannel(channelId) {
         }
         
         // Listeners
-        modalElements.closeButton.addEventListener('click', closeProjectModal);
+        modalElements.closeButton.addEventListener('click', () => closeModal(PROJECT_MODAL));
         PROJECT_MODAL.addEventListener('click', (e) => {
-            if (e.target === PROJECT_MODAL) closeProjectModal();
+            if (e.target === PROJECT_MODAL) closeModal(PROJECT_MODAL);
         });
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && PROJECT_MODAL.classList.contains('active')) closeProjectModal();
+            if (e.key === 'Escape' && PROJECT_MODAL.classList.contains('active')) closeModal(PROJECT_MODAL);
         });
 
         // Project Tile Click Handler
@@ -315,16 +359,7 @@ function navigateToChannel(channelId) {
         }
         // Sound toggle logic (with double-click for ambient) is complex and best kept in its original functional block.
 
-        // Add nostalgic animation to the header
-        HEADER.addEventListener('mouseenter', () => {
-            if (!window.settingsManager.getSetting('reducedMotion')) {
-                HEADER.classList.add('header-animation');
-            }
-        });
 
-        HEADER.addEventListener('mouseleave', () => {
-            HEADER.classList.remove('header-animation');
-        });
 
         // Status bar logic
         const statusBar = document.getElementById('status-bar');
@@ -334,7 +369,7 @@ function navigateToChannel(channelId) {
         // Initialize status bar with default message
         statusBarText.textContent = defaultStatusBarMessage;
 
-        const interactiveTiles = document.querySelectorAll('.channel-tile, .project-tile');
+        const interactiveTiles = document.querySelectorAll('.channel-tile, .project-tile, .ds-bar-item');
 
         interactiveTiles.forEach(tile => {
             tile.addEventListener('mouseenter', () => {
@@ -344,40 +379,26 @@ function navigateToChannel(channelId) {
                     statusBar.classList.add('visible');
                 } else {
                     // Fallback for tiles without a specific description
-                    statusBarText.textContent = tile.dataset.channel ? `Explore the ${tile.dataset.channel} channel.` : defaultStatusBarMessage;
+                    let message = defaultStatusBarMessage;
+                    if (tile.dataset.channel) {
+                        const channelName = tile.dataset.channel.replace(/-/g, ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                        message = `Explore the ${channelName} channel.`;
+                    } else if (tile.classList.contains('project-tile')) {
+                        message = `View details for ${tile.querySelector('h3').textContent}.`;
+                    }
+                    statusBarText.textContent = message;
                     statusBar.classList.add('visible');
                 }
             });
 
             tile.addEventListener('mouseleave', () => {
                 statusBarText.textContent = defaultStatusBarMessage; // Reset to default message
-                statusBar.classList.remove('visible'); // Optionally hide if desired, or keep visible with default text
+                statusBar.classList.add('visible'); // Keep visible with default text
             });
         });
     }
 
-    // --- Eye Tracking for Mii Avatar ---
-    function initEyeTracking() {
-        const miiHead = document.querySelector('.mii-head');
-        const miiEyes = document.querySelectorAll('.mii-eye');
 
-        if (!miiHead || miiEyes.length === 0) return;
-
-        document.addEventListener('mousemove', (e) => {
-            const headRect = miiHead.getBoundingClientRect();
-            const headCenterX = headRect.left + headRect.width / 2;
-            const headCenterY = headRect.top + headRect.height / 2;
-
-            const angle = Math.atan2(e.clientY - headCenterY, e.clientX - headCenterX);
-            const distance = Math.min(headRect.width / 4, 10); // Limit eye movement
-
-            miiEyes.forEach(eye => {
-                const eyeX = Math.cos(angle) * distance;
-                const eyeY = Math.sin(angle) * distance;
-                eye.style.transform = `translate(${eyeX}px, ${eyeY}px)`;
-            });
-        });
-    }
 
 
     // --- Contact Form Handling ---
@@ -393,20 +414,10 @@ function navigateToChannel(channelId) {
             const message = form.elements['message'].value.trim();
             
             // Simple email regex for quick client-side check
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+            const emailRegex = /^[^\s@]+@[^\s@]+\\.[^\s@]+$/; 
 
-            if (!name) {
-                showErrorModal("Input Error!", "Please enter your name!");
-                return false;
-            }
-
-            if (!email || !emailRegex.test(email)) {
-                showErrorModal("Input Error!", "Please enter a valid email address!");
-                return false;
-            }
-            
-            if (!message) {
-                showErrorModal("Input Error!", "Don't forget your message!");
+            if (!name || !email || !message || !emailRegex.test(email)) {
+                showErrorModal("ERROR: Missing User Input.", "Please fill out all required fields before sending.");
                 return false;
             }
 
@@ -421,12 +432,12 @@ function navigateToChannel(channelId) {
             if (validateForm(CONTACT_FORM)) { // Use CONTACT_FORM here
                 // 2. Simulate submission (Replace with actual server/service logic later)
                 
-                // Show success notification (can still use showWiiNotification for success)
-                showWiiNotification("📬 Message Sent! I'll get back to you soon.", 'success', 5000); 
+                // Show success notification
+                showNotification("📬 Message Sent! I'll get back to you soon.", 'success', 5000); 
                 
                 // Optional: Show a subtle confirmation notification after a delay
                 setTimeout(() => {
-                    showWiiNotification("Check your Mii Message Board for a reply!", 'hint', 4000);
+                    showNotification("Check your Mii Message Board for a reply!", 'hint', 4000);
                 }, 1000);
 
                 // Clear the form fields after success
@@ -456,7 +467,7 @@ function navigateToChannel(channelId) {
 
         initUIInteractions();
 
-        initEyeTracking();
+
 
         initContactForm();
 
@@ -481,7 +492,33 @@ function navigateToChannel(channelId) {
 
     });
 
-// --- Wii Message Board Style Notifications (Kept outside DOMContentLoaded for global access) ---
-// ... (Your original showWiiNotification and helper functions are kept here)
+// --- Notification Functions ---
+function showNotification(message, type = 'info', duration = 3000) {
+    const notificationContainer = document.getElementById('notification-container');
+    if (!notificationContainer) {
+        console.error('Notification container not found!');
+        return;
+    }
 
-// Final line: Remove the redundant final closing brace if it existed.
+    const notification = document.createElement('div');
+    notification.classList.add('notification', `notification-${type}`);
+    notification.textContent = message;
+
+    notificationContainer.appendChild(notification);
+
+    // Trigger digital pop-in animation
+    requestAnimationFrame(() => {
+        notification.classList.add('pop-in');
+    });
+
+    setTimeout(() => {
+        // Trigger glitchy fade-out animation
+        notification.classList.remove('pop-in');
+        notification.classList.add('fade-out-glitch');
+
+        // Remove notification after animation completes
+        notification.addEventListener('animationend', () => {
+            notification.remove();
+        }, { once: true });
+    }, duration);
+}
