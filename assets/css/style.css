@@ -52,6 +52,97 @@
     padding: 10px; /* Inner padding to simulate screen inset */
 }
 
+/* Corner Lights for DS Console and Screens */
+.ds-console::before,
+.ds-console::after,
+.ds-screen-top::before,
+.ds-screen-top::after,
+.ds-screen-bottom::before,
+.ds-screen-bottom::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+/* DS Console Power Indicator (Green) */
+.ds-console::before {
+    background-color: #00ff00; /* Green */
+    box-shadow: 0 0 8px #00ff00;
+    top: 15px;
+    left: 15px;
+}
+
+/* DS Console Wi-Fi Indicator (Blue) */
+.ds-console::after {
+    background-color: #00aaff; /* Blue */
+    box-shadow: 0 0 8px #00aaff;
+    top: 15px;
+    right: 15px;
+}
+
+/* DS Screen Top Left Light (e.g., Charging - Orange) */
+.ds-screen-top::before {
+    background-color: #ffa500; /* Orange */
+    box-shadow: 0 0 6px #ffa500;
+    top: 5px;
+    left: 5px;
+}
+
+/* DS Screen Top Right Light (e.g., Notification - Red) */
+.ds-screen-top::after {
+    background-color: #ff0000; /* Red */
+    box-shadow: 0 0 6px #ff0000;
+    top: 5px;
+    right: 5px;
+}
+
+/* DS Screen Bottom Left Light (e.g., Mic - White) */
+.ds-screen-bottom::before {
+    background-color: #ffffff; /* White */
+    box-shadow: 0 0 6px #ffffff;
+    bottom: 5px;
+    left: 5px;
+}
+
+/* DS Screen Bottom Right Light (e.g., Stylus - Yellow) */
+.ds-screen-bottom::after {
+    background-color: #ffff00; /* Yellow */
+    box-shadow: 0 0 6px #ffff00;
+    bottom: 5px;
+    right: 5px;
+}
+
+/* Speaker Grills for DS Top Screen */
+.ds-screen-top {
+    position: relative; /* Ensure pseudo-elements are positioned relative to this */
+}
+
+.ds-screen-top::before,
+.ds-screen-top::after {
+    content: '';
+    position: absolute;
+    width: 20px; /* Width of the grill area */
+    height: 6px; /* Height of the grill area */
+    background-color: rgba(0, 0, 0, 0.3); /* Dark gray for grills */
+    border-radius: 3px; /* Slightly rounded corners for the grill */
+    top: 10px;
+    /* Create multiple small slots */
+    background-image: linear-gradient(to right, rgba(0,0,0,0.5) 2px, transparent 2px, transparent 4px);
+    background-size: 4px 100%;
+}
+
+.ds-screen-top::before {
+    left: 15px;
+}
+
+.ds-screen-top::after {
+    right: 15px;
+}
+
 .ds-screen-top {
     height: 30%; /* Top screen takes 30% of console height */
     border-bottom: none;
