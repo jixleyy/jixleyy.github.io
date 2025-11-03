@@ -191,55 +191,6 @@ class AudioManager {
       console.error('Error preparing ambient sound:', error);
     }
   }
-    if (!this.ambientEnabled || !this.soundEnabled) return;
-
-    console.log('Attempting to play ambient sound with URL:', url); // Debug log
-
-    // Stop any existing ambient sound
-    this.stopAmbientSound();
-
-    try {
-      // For ambient sound, we'll use the traditional HTML5 audio approach for looping
-      this.ambientSound = new Audio(url);
-      this.ambientSound.loop = true;
-      this.ambientSound.volume = this.masterVolume * 0.4; // Lower volume for ambient sound
-      this.ambientSound.preload = 'auto'; // Ensure audio is preloaded
-
-      // Event listeners for debugging
-      this.ambientSound.addEventListener('loadstart', () => {
-        console.log('Ambient sound: load started');
-      });
-
-      this.ambientSound.addEventListener('canplay', () => {
-        console.log('Ambient sound: can play');
-      });
-
-      this.ambientSound.addEventListener('canplaythrough', () => {
-        console.log('Ambient sound: can play through, attempting to play');
-        const playPromise = this.ambientSound.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(error => {
-            console.warn('Ambient sound autoplay prevented:', error);
-            // If autoplay fails, we'll try again after user interaction
-          });
-        }
-      }, { once: true });
-
-      this.ambientSound.addEventListener('error', (e) => {
-        console.error('Error loading ambient sound:', e);
-        console.error('Media error:', this.ambientSound.error);
-      });
-
-      this.ambientSound.addEventListener('suspend', () => {
-        console.log('Ambient sound: loading was suspended');
-      });
-
-      // Load the audio file
-      this.ambientSound.load();
-    } catch (error) {
-      console.error('Error preparing ambient sound:', error);
-    }
-  }
 
   stopAmbientSound() {
     if (this.ambientSound) {
