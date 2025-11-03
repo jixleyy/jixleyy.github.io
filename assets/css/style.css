@@ -43,11 +43,13 @@
 .ds-screen {
     flex-grow: 1;
     background-color: var(--screen-bg-color); /* Screen background */
-    border: 5px solid #c0c0c0; /* Screen bezel */
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+    border: 8px solid var(--ds-console-body-bg); /* Thicker bezel using console body color */
+    border-radius: 0; /* Sharp corners for the screen */
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.2); /* More pronounced bezel shadow */
     display: flex;
     flex-direction: column;
     position: relative;
+    padding: 10px; /* Inner padding to simulate screen inset */
 }
 
 .ds-screen-top {
