@@ -428,3 +428,32 @@ body.reduced-motion .card:hover {
     box-shadow: none;
     filter: none;
 }
+
+.ds-screen-bottom input[type="text"],
+.ds-screen-bottom input[type="email"],
+.ds-screen-bottom textarea,
+.ds-screen-bottom select {
+    background-color: #f0f0f0; /* Light background */
+    border: 2px solid #555; /* Dark border */
+    border-radius: 4px; /* Slightly rounded corners */
+    padding: 8px;
+    color: var(--text-color);
+    box-shadow: none; /* Remove shadows */
+    appearance: none; /* Remove default system styling for select */
+}
+
+.ds-screen-bottom select {
+    padding-right: 30px; /* Make space for a custom arrow if needed */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13.2-5.4H18.2c-5%200-9.3%201.8-13.2%205.4A17.6%2017.6%200%200%200%200%2082.6c0%204.8%201.8%209.3%205.4%2013.2l128%20127.9c3.9%203.9%208.4%205.7%2013.2%205.7s9.3-1.8%2013.2-5.7l128-127.9c3.8-3.9%205.6-8.4%205.6-13.2%200-4.8-1.8-9.3-5.6-13.2z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow for select */
+    background-repeat: no-repeat;
+    background-position: right 8px top 50%;
+    background-size: 12px auto;
+}
+
+button:active,
+a:active,
+.ds-bar-item:active {
+    transform: translateY(2px); /* Visual "press down" effect */
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2); /* Inner shadow for pressed look */
+    filter: brightness(0.9); /* Slightly darken on press */
+}
