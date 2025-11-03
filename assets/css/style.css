@@ -323,3 +323,18 @@ body.reduced-motion .card:hover {
     transform: none !important;
     box-shadow: none !important;
 }
+
+/* Custom DS Cursor */
+.floating-cursor-icon {
+    position: fixed;
+    width: 16px;
+    height: 16px;
+    background-color: var(--primary-color); /* DS accent color */
+    border-radius: 0; /* Square shape */
+    pointer-events: none; /* Don't interfere with clicks */
+    z-index: 9999;
+    transition: transform 0.05s linear;
+    /* Remove any glowing/blurry effects */
+    box-shadow: none;
+    filter: none;
+}
