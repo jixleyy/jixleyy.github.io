@@ -15,16 +15,28 @@
 
 /* DS Console Wrapper */
 .ds-console {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 800px; /* Adjust as needed for overall console size */
-    height: 100vh; /* Full viewport height */
-    margin: 0 auto;
+    display: grid; /* Use CSS Grid for layout */
+    max-width: 900px; /* Constrain overall console width */
+    height: 600px; /* Fixed height for the console */
+    margin: 20px auto; /* Center the console with some top/bottom margin */
     border-radius: 25px;
     overflow: hidden;
-    background-color: #e0e0e0; /* Console body color */
+    background-color: var(--ds-console-body-bg); /* Console body color */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    /* Desktop: Side-by-side screens */
+    grid-template-columns: 1fr 1fr;
+}
+
+/* Mobile: Stacked screens */
+@media (max-width: 768px) {
+    .ds-console {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        height: 100vh; /* Full height on mobile */
+        max-width: 100%; /* Full width on mobile */
+        margin: 0;
+        border-radius: 0;
+    }
 }
 
 /* Individual DS Screens */
@@ -255,14 +267,15 @@ section.visible {
 
 /* Global transition durations controlled by settings.js */
 :root {
-    --primary-color: #0078D7; /* Wii Blue */
-    --secondary-color: #FF5722; /* Accent color */
-    --text-color: #333333;
-    --bg-color: #f0f4f9; /* Light background */
-    --card-bg-color: #ffffff;
-    --card-shadow: 0 4px 14px rgba(0,0,0,0.12);
-    --border-radius: 22px;
-    --screen-bg-color: #e8f2ff; /* Light blue for screens */
+--primary-color: #00A8E8; /* DS Blue Accent */
+    --secondary-color: #E8004A; /* DS Red Accent, for variety */
+    --text-color: #2F2F2F; /* Darker text for contrast */
+    --bg-color: #E0E0E0; /* Light gray for console background */
+    --card-bg-color: #FFFFFF; /* White for card backgrounds */
+    --card-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    --border-radius: 12px; /* A bit sharper corners for DS feel */
+    --screen-bg-color: #F8F8F8; /* Very pale gray for screens */
+    --ds-console-body-bg: #323232; /* Dark gray for DS console body */
 
     --time-fast: 0.18s;
 }
