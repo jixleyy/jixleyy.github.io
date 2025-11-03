@@ -7,9 +7,9 @@ class DSCursor {
     this.targetY = 0;
     this.velocityX = 0;
     this.velocityY = 0;
-    this.friction = 0.75;
-    this.spring = 0.08;
-    this.wobbleIntensity = 0.15;
+    this.friction = 0.9;
+    this.spring = 0.15;
+    this.wobbleIntensity = 0;
     this.cursorElement = null;
     this.init();
   }
@@ -102,17 +102,8 @@ class DSCursor {
       const wobbleX = Math.sin(Date.now() * 0.01) * this.wobbleIntensity * Math.min(1, Math.abs(this.velocityX) * 2);
       const wobbleY = Math.cos(Date.now() * 0.013) * this.wobbleIntensity * Math.min(1, Math.abs(this.velocityY) * 2);
       
-      const velocityMagnitude = Math.sqrt(this.velocityX * this.velocityX + this.velocityY * this.velocityY);
-      let idleDriftX = 0;
-      let idleDriftY = 0;
-      
-      if (velocityMagnitude < 0.1) {
-        idleDriftX = Math.sin(Date.now() * 0.002) * 0.4;
-        idleDriftY = Math.cos(Date.now() * 0.003) * 0.4;
-      }
-      
-      this.cursorElement.style.left = `${this.targetX + wobbleX + idleDriftX}px`;
-      this.cursorElement.style.top = `${this.targetY + wobbleY + idleDriftY}px`;
+      this.cursorElement.style.left = `${this.targetX + wobbleX}px`;
+      this.cursorElement.style.top = `${this.targetY + wobbleY}px`;
     }
     
     requestAnimationFrame(() => this.animate());
